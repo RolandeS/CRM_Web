@@ -1,5 +1,7 @@
 require 'sinatra'
 require_relative 'contact' #or require './contact'
+require_relative 'rolodex'
+
 
 get '/' do
   # "Main Menu"
