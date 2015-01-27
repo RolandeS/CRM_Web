@@ -7,8 +7,10 @@
 	<h3>Contacts</h3>
 	<p>Listing:</p>
 	<ul>
-	  <li></li>
-	  <!-- please complete me with links to other actions -->
+	  
+	  <% @contacts.each do |contact| %>
+	  <li><%= contact.first_name %> <%= contact.last_name %> <%= contact.email%></li>
+	  <% end %>
 
 	  <li><a href="/contacts/new">Add a contact</a></li>
 	</ul>
