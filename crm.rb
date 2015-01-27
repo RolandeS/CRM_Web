@@ -1,4 +1,5 @@
 require 'sinatra'
+require_relative 'contact' #or require './contact'
 
 get '/' do
   # "Main Menu"
