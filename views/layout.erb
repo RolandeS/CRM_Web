@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="e"n>
+<head>
+	<meta charset="UTF-8">
+	<title><%= @title %></title>
+	<meta title="og:title" content="My RO first page // HTML CSS page">
+
+	<link rel="stylesheet" type="text/css" href="/style.css">
+</head>
+<body>
+	<header>
+		<img src="/images/crm_img_000.jpg">
+		<p>Time: <%=$time%></p>
+	</header>
+	<nav>
+		<li><a href="/crm_page">CRM</a></li>
+		<li><a href="">News</a></li>
+		<li><a href="">Article of the day</a></li>
+		<li><a href="">Blog</a></li>
+		<li><a href="">About RO</a></li>
+	</nav>
+	
+	<div id="main_content">
+		<%= yield %>
+	</div>
+	
+	<div id="right_menu"></div>
+
+	<footer>
+		©2015 RO CRM app		<a href='/'>Go to the home page</a></p>
+	</footer>
+</body>
+</html>
