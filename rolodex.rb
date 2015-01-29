@@ -51,10 +51,14 @@ class Rolodex
 		end
 	end
 
-	def delete_contact(contact_id)
+	# def delete_contact(contact_id)
 		
-		contact = @contacts.find {|contact| contact.id == contact_id }
-		index = @contacts.index(contact).to_i
-		@contacts.delete_at(index)
-	end
+	# 	contact = @contacts.find {|contact| contact.id == contact_id }
+	# 	index = @contacts.index(contact).to_i
+	# 	@contacts.delete_at(index)
+	# end
+
+	def remove_contact(contact)
+		@contacts.delete(contact)
+    end
 end
