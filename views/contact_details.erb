@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<h2>Contact Details</h2>
+<h4>List of Exisiting contact:</h4>
+<ul>
+	  
+	  <% @@rolodex.contacts.each do |contact| %>
+	  <li><%= contact.first_name %> <%= contact.last_name %> <%= contact.email%> <%= contact.id%> </li>
+	  <% end %>
+
+<form id="contact_details" action="/display_contact" method="get"> 
+	<label for="contact_id">Contact ID</label>
+	<input id="contact_id" type="text" name= "id" placeholder= "eg: 1003">
+	<input type="submit" value="Look for this contact">
+	<a href="/display_contact">Display</a>
+
+
+	
+ 	
+ </form>

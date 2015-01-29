@@ -1,11 +1,20 @@
 
 <h2> Add a new contact below </h2>
-<form action="/contacts" method="post">
-	<input type="text" name= "first_name">
-	<input type="text" name= "last_name">
-	<input type="text" name= "email">
-	<input type="text" name= "note">
+<form id="contact_form" action="/contacts" method="post"> <!-- added an ID here in case wanna use java script...-->
+	<label for="first_name_id">First Name</label>
+	<input id="first_name_id" type="text" name= "first_name" placeholder= "first name">
+
+	<label for="last_name_id">Last Name</label>
+	<input id = "last_name_id" type="text" name= "last_name" placeholder= "last name" >
+	
+	<label for="email_id">Email</label>
+	<input id="email_id" type="text" name= "email" placeholder= "name@mail.com">
+	
+	<label for="note_id">Note</label>
+	<input id="note_id" type="text" name= "note" placeholder= "ttttt">
+	
 	<input type="submit" value="Add">
+
 </form>
 
 <p><a href='/crm_page'>Click here</a> to go back to the CRM! :) </p>

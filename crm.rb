@@ -2,8 +2,12 @@ require 'sinatra'
 require_relative 'contact' #or require './contact'
 require_relative 'rolodex'
 
-$rolodex = Rolodex.new
+@@rolodex = Rolodex.new
 $time = Time.now.ctime
+
+@@rolodex.add_contact(Contact.new("Amy", "Su", "amysu@gmail.com", "mill eeieo llfkjhf ;khjdaf"))
+@@rolodex.add_contact(Contact.new("Jon", "Ka", "jonka@gmail.com", "NOTe mdfkjhf ;khjdaf"))
+
 get '/' do
   @title = "RO"
   erb :index
@@ -25,10 +29,10 @@ get '/contacts/new' do
 	erb :new
 end
 
-get '/contact' do
-	@title = "CRM page under construction"
-	erb :construction
-end
+# get '/contact' do
+# 	@title = "CRM page under construction"
+# 	erb :construction
+# end
 
 get '/update' do
 	@title = "CRM page under construction"
@@ -42,7 +46,34 @@ end
 
 post '/contacts' do
 	new_contact = Contact.new(params[:first_name], params[:last_name], params[:email], params[:note])
-	$rolodex.add_contact(new_contact)
+	@@rolodex.add_contact(new_contact)
 	redirect to('contacts')
 end
+
+get "/contacts/:id" do
+	@title = "Display Contact"
+	@contact = @@rolodex.display_particular_contact(params[:id].to_i)
+	if @contact
+		erb :display_contact
+	else
+		raise sinatra::NotFound
+	end
+end
+
+get '/contact_details' do
+	@title = "Contact Details"
+	erb :contact_details
+end
+
+# get '/display_contact' do
+# 	puts "Params: #{params.inspect}"
+# 	@id = params[:id]
+# 	@title = "Display Contact"
+# 	erb :display_contact
+# end
+
+# post '/display_contact' do
+# 	@find_contact= @@rolodex.display_particular_contact(params[:id])
+# 	redirect to('display_contact')
+# end
 

@@ -3,19 +3,19 @@ class Rolodex
 	
 	def initialize
 		@contacts = []
-		@@ids = 1001
+		@id = 1000
 	end
 
 	def add_contact(contact)
-		contact.id = @@ids
+		contact.id = @id
 		@contacts << contact
-		@@ids += 1
-		# contact
+		@id += 1
+		contact
 	end
 
-	def modify_contact(id, num, new_value)
-		index = @contacts.index(id).to_i
-		contact = @contacts[index]
+	def modify_contact(contact_id, num, new_value)
+		contact = @contacts.find {|contact| contact.id == contact_id }
+		
 		case num
 		when 1 then contact.first_name = new_value.to_s
 		when 2 then contact.last_name = new_value.to_s
@@ -31,14 +31,15 @@ class Rolodex
 		@contacts
 	end
 	
-	def display_particular_contact(id)
-		 index = @contacts.index(id)
-		 @contacts [index.to_i]
+	def display_particular_contact(contact_id)
+
+		@contacts.find {|contact| contact.id == contact_id }
+
 	end
 
-	def display_info_by_attribute(id, num)
-		index = @contacts.index(id)
-		contact = @contacts[index.to_i]
+	def display_info_by_attribute(contact_id, num)
+		
+		contact = @contacts.find {|contact| contact.id == contact_id }
 
 		case num
 		when 1 then return contact.first_name
@@ -50,8 +51,10 @@ class Rolodex
 		end
 	end
 
-	def delete_contact(id)
-		index = @contacts.index(id).to_i
+	def delete_contact(contact_id)
+		
+		contact = @contacts.find {|contact| contact.id == contact_id }
+		index = @contacts.index(contact).to_i
 		@contacts.delete_at(index)
 	end
 end
