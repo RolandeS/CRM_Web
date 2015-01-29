@@ -1,0 +1,22 @@
+
+<h2> Edit a contact below </h2>
+
+<form action="/contacts/<%= @contact.id %>" method="post">
+	<input type="hidden" name="_method" value="put">
+
+	<label for="first_name_id">First Name</label>
+	<input id="first_name_id" type="text" name="first_name" value="<%= @contact.first_name %>">
+	
+	<label for="last_name_id">Last Name</label>
+	<input id = "last_name_id" type="text" name="last_name" value="<%= @contact.last_name %>">
+	
+	<label for="email_id">Email</label>
+	<input id="email_id" type="text" name="email" value="<%= @contact.email %>">
+	
+	<label for="note_id">Note</label>
+	<input id="note_id" type="text" name="note" value="<%= @contact.note %>">
+	
+	<input type="submit" name="Submit">
+</form>
+
+<p><a href='/crm_page'>Click here</a> to go back to the CRM! :) </p>

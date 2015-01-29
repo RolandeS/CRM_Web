@@ -50,6 +50,11 @@ post '/contacts' do
 	redirect to('contacts')
 end
 
+get '/contact_details' do
+	@title = "Contact Details"
+	erb :contact_details
+end
+
 get "/contacts/:id" do
 	@title = "Display Contact"
 	@contact = @@rolodex.display_particular_contact(params[:id].to_i)
@@ -60,9 +65,13 @@ get "/contacts/:id" do
 	end
 end
 
-get '/contact_details' do
-	@title = "Contact Details"
-	erb :contact_details
+get "/contacts/:id/edit" do
+	@contact = @@rolodex.display_particular_contact(params[:id].to_i)
+	if @contact
+		erb :edit_contact
+	else
+		rais Sinatra::NotFound
+	end
 end
 
 # get '/display_contact' do
