@@ -2,11 +2,11 @@ require 'sinatra'
 require_relative 'contact' #or require './contact'
 require_relative 'rolodex'
 
-@@rolodex = Rolodex.new
+$rolodex = Rolodex.new
 $time = Time.now.ctime
 
-@@rolodex.add_contact(Contact.new("Amy", "Su", "amysu@gmail.com", "mill eeieo llfkjhf ;khjdaf"))
-@@rolodex.add_contact(Contact.new("Jon", "Ka", "jonka@gmail.com", "NOTe mdfkjhf ;khjdaf"))
+$rolodex.add_contact(Contact.new("Amy", "Su", "amysu@gmail.com", "mill eeieo llfkjhf ;khjdaf"))
+# $rolodex.add_contact(Contact.new("Jon", "Ka", "jonka@gmail.com", "NOTe mdfkjhf ;khjdaf"))
 
 get '/' do
   @title = "RO"
@@ -21,6 +21,7 @@ end
 
 get '/contacts' do
 	@title = "Contacts"
+	@contact = $rolodex.contacts
 	erb :contacts
 end
 
@@ -46,18 +47,24 @@ end
 
 post '/contacts' do
 	new_contact = Contact.new(params[:first_name], params[:last_name], params[:email], params[:note])
-	@@rolodex.add_contact(new_contact)
+	$rolodex.add_contact(new_contact)
 	redirect to('contacts')
 end
 
 get '/contact_details' do
 	@title = "Contact Details"
-	erb :contact_details
+	# @contact = $rolodex.display_particular_contact(params[:id].to_i)
+	# if @contact
+		erb :contact_details
+	# else
+	# 	raise Sinatra::NotFound
+	# end
 end
 
 get "/contacts/:id" do
 	@title = "Display Contact"
-	@contact = @@rolodex.display_particular_contact(params[:id].to_i)
+	id = gsub(/\?id=/, '')
+	@contact = $rolodex.display_particular_contact(params[:id].to_i)
 	if @contact
 		erb :display_contact
 	else
@@ -66,7 +73,7 @@ get "/contacts/:id" do
 end
 
 put "/contacts/:id" do
-	@contact = @@rolodex.find(params[:id].to_i)
+	@contact = $rolodex.find(params[:id].to_i)
 	if @contact
 		@contact.first_name = params[:first_name]
 		@contact.last_name = params[:last_name]
@@ -80,7 +87,7 @@ put "/contacts/:id" do
 end
 
 get "/contacts/:id/edit" do
-	@contact = @@rolodex.display_particular_contact(params[:id].to_i)
+	@contact = $rolodex.display_particular_contact(params[:id].to_i)
 	if @contact
 		erb :edit_contact
 	else
@@ -89,10 +96,10 @@ get "/contacts/:id/edit" do
 end
 
 delete "/contacts/:id" do
-	@contact = @@rolodex.find(params[:id].to_i)
+	@contact = $rolodex.find(params[:id].to_i)
 	
 	if @contact
-		@@rolodex.remove_contact(@contact)
+		$rolodex.remove_contact(@contact)
 		redirect to("/contacts")
 	else
 		raise Sinatra::NotFound
@@ -107,7 +114,7 @@ end
 # end
 
 # post '/display_contact' do
-# 	@find_contact= @@rolodex.display_particular_contact(params[:id])
+# 	@find_contact= $rolodex.display_particular_contact(params[:id])
 # 	redirect to('display_contact')
 # end
 
